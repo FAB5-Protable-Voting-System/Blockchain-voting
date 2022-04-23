@@ -3002,11 +3002,11 @@ footer {
 
 .page-title {
   margin: 15px 0;
-  padding: 0 .5em;
-  
+  padding: 0 .5em; 
+  font-size: 3.5em;
   font-family: var(--title-font);
   font-weight: 700;
-  font-size: clamp(2.6rem, 4vw, 3.2rem);
+  font-size: clamp(2.6rem, 4vw, 3.5rem);
   text-align: center;
   
   color: var(--light-black);
@@ -3015,8 +3015,14 @@ footer {
 
 
 /*-----------------------------Conversion Rate Table---------------------------*/
+.page-title{
+  padding-top:3%;
+  color:#22577E;
+
+}
+
 .conversion-rate-table {
-  flex-basis: min(80%, 900px);
+  flex-basis: min(80%, 1000px);
   
   display: none;
   
@@ -3030,15 +3036,16 @@ footer {
 }
 
 .table__headers {
-  background-color: var(--blue);
+  background-color: #61A4BC;
 }
+
 
 .header {
   padding: .25em 0;
   
-  font-family: var(--title-font), sans-serif;
-  font-size: 2.4rem;
-  font-weight: 500;
+  
+  font-size: 3rem;
+  font-weight: 600;
   
   color: var(--white);
 }
@@ -3049,25 +3056,45 @@ footer {
 
 .row__cell{
   padding: .25em 0;
-  
-  font-family: var(--data-font), sans-serif;
+  font-family: monospace;
   font-size: 2rem;
+  font-weight: 800;
   text-align: center;
+  color: var(--light-black);
 }
 
 .row__cell + .row__cell,
 .header + .header {
   border-left: 1px solid var(--light-gray);
 }
-
-.vote_btn{
-    background-color: var(--blue);
-    border-radius: 15px;
-    width: 30%;
+.vote-btn {
+  appearance:none;
+  border-radius:3px;
+  border:0;
+  background:#F4F4F4;
+  padding:15px 12px 15px 40px;
+  font:800 14px/1.1 arial;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:#4E944F;
+  box-shadow:0 1px 1px rgba(0,0,0,.2);
+  outline:none;
+  position:relative;
+  cursor: pointer;
 }
-.vote_btn:focus{
-  background-color: var(--green)
-}
+  .btn-icon {
+    position:absolute;
+    content: "";
+    left:10px;
+    top:12px;
+    width:20px;
+    height:20px;
+    border-radius:10px;
+    display:inline-block;
+    background:#4E944F url(https://jamesmuspratt.com/codepen/img/checkmark.svg) no-repeat 2px 1px;
+    background-size: 16px auto;
+    transition: all .3s ease-out; 
+  }
 
 @media (min-width: 600px) {
   .conversion-rate-list {
@@ -3085,4 +3112,14 @@ footer {
 
     min-height: 80vh;
   }
+}
+
+/* -----Redirect Page----- */
+.redirect-page {
+  text-align: center;
+  padding-top: 18%;
+  font-size:10pt;
+  position: absolute;
+  font-family:Arial;
+  color:black;
 }
