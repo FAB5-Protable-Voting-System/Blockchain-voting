@@ -8,7 +8,6 @@ const CandidateModel = db.model(
         partyId: {
             type: mongoose.Types.ObjectId,
             required: true,
-            unique: true,
         },
         state: { type: String, required: true },
         description: { type: String },

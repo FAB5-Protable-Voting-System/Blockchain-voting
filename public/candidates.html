@@ -1,62 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <title>Portable Voting System</title>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/font-awesome.css" rel="stylesheet" />
+        <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet" />
+        <link href="js/owl-carousel/owl.theme.css" rel="stylesheet" />
+        <link href="js/owl-carousel/owl.transitions.css" rel="stylesheet" />
+        <link href="css/magnific-popup.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="css/animate.css" />
+        <link rel="stylesheet" href="css/etlinefont.css" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
 
-<head>
-    <title>Portable Voting System</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/font-awesome.css" rel="stylesheet" />
-    <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet" />
-    <link href="js/owl-carousel/owl.theme.css" rel="stylesheet" />
-    <link href="js/owl-carousel/owl.transitions.css" rel="stylesheet" />
-    <link href="css/magnific-popup.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="css/animate.css" />
-    <link rel="stylesheet" href="css/etlinefont.css" />
-    <link href="css/style.css" type="text/css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
-
-<body>
-    <header id="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#main-menu">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="fa fa-bars"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <div class="clear-toggle"></div>
-                    <div id="main-menu" class="collapse scroll navbar-right">
-                        <ul class="nav">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="facts.html">Live Result</a></li>
-                            <li class="active">
-                                <a href="candidates.html">Candidates</a>
-                            </li>
-                            <li><a href="login.html">Vote</a></li>
-                        </ul>
+    <body>
+        <header id="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button
+                            type="button"
+                            class="navbar-toggle collapsed"
+                            data-toggle="collapse"
+                            data-target="#main-menu"
+                        >
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="fa fa-bars"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="clear-toggle"></div>
+                        <div
+                            id="main-menu"
+                            class="collapse scroll navbar-right"
+                        >
+                            <ul class="nav">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="facts.html">Live Result</a></li>
+                                <li class="active">
+                                    <a href="candidates.html">Candidates</a>
+                                </li>
+                                <li><a href="login.html">Vote</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
-    <section id="history" class="section parallax">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="title-box text-center white">
-                <h2 class="title">Parties</h2>
-            </div>
+        </header>
+        <section id="history" class="section parallax">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="title-box text-center white">
+                    <h2 class="title">Parties</h2>
+                </div>
 
-            <!-- History Timeline -->
-            <ul class="timeline list-unstyled" id="party">
-
-                <!-- <li class="year" id="abc">DC</li> -->
-                <!--History Item -->
-                <!-- <li class="timeline-item">
+                <!-- History Timeline -->
+                <ul class="timeline list-unstyled" id="party">
+                    <!-- <li class="year" id="abc">DC</li> -->
+                    <!--History Item -->
+                    <!-- <li class="timeline-item">
                     <h4>Democratic Congress</h4>
                 </li>
                 <li class="clear"></li>
@@ -71,222 +79,279 @@
                     <h4>Charotar Union</h4>
                 </li>
                 <li class="clear"></li> -->
-                <script>
-                    $(document).ready(() => {
-                        $.get('http://localhost:8501/pp/party', (data) => {
-                            data.data.forEach((item, index) => {
-                                var a = document.getElementById("party")
-                                var li = document.createElement('li');
-                                li.className = "year";
-                                li.innerHTML = item.name;
-                                a.appendChild(li);
-                                li = document.createElement('li');
-                                li.className = "timeline-item";
-                                var h4 = document.createElement('h4')
-                                h4.innerHTML = item.description;
-                                li.appendChild(h4);
-                                a.appendChild(li);
-                                li = document.createElement('li');
-                                li.className = "clear";
-                                a.appendChild(li);
-                            })
-                        })
-                    })
-                </script>
+                    <script>
+                        $(document).ready(() => {
+                            $.get("http://localhost:8501/pp/party", (data) => {
+                                data.data.forEach((item, index) => {
+                                    var a = document.getElementById("party");
+                                    var li = document.createElement("li");
+                                    li.className = "year";
+                                    li.innerHTML = item.name;
+                                    a.appendChild(li);
+                                    li = document.createElement("li");
+                                    li.className = "timeline-item";
+                                    var h4 = document.createElement("h4");
+                                    h4.innerHTML = item.description;
+                                    li.appendChild(h4);
+                                    a.appendChild(li);
+                                    li = document.createElement("li");
+                                    li.className = "clear";
+                                    a.appendChild(li);
+                                });
+                            });
+                        });
+                    </script>
+                </ul>
+            </div>
+        </section>
 
-            </ul>
-        </div>
-    </section>
+        <section id="team" class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="title-box text-center">
+                        <h2 class="title">Candidates</h2>
+                    </div>
+                </div>
 
-    <section id="team" class="section">
-        <div class="container">
-            <div class="row">
-                <div class="title-box text-center">
-                    <h2 class="title">Candidates</h2>
+                <!-- Team -->
+                <div class="team-items team-carousel" id="candidates">
+                    <!-- Team Member #1 -->
+                    <div class="item">
+                        <img src="img/team/team2.png" alt="" />
+                        <h4>Malay Bhavsar</h4>
+                        <h5>Charotar Union</h5>
+                        <p>
+                            Lorem ipsum dolor consectetur dolor consectetur
+                            adipisicing incididunt eiusmod temporcd incididunt
+                            consectetur laboredolore dolor adipisicing.
+                        </p>
+
+                        <div class="socials">
+                            <ul>
+                                <li>
+                                    <a class="facebook" href="#"
+                                        ><i class="fa fa-facebook"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="twitter" href="#"
+                                        ><i class="fa fa-twitter"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="linkedin" href="#"
+                                        ><i class="fa fa-linkedin"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="google-plus" href="#"
+                                        ><i class="fa fa-google-plus"></i
+                                    ></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Member -->
+                    <!--
+                    <script>
+                        $(document).ready(() => {
+                            $.get(
+                                "http://localhost:8501/pp/candidate",
+                                (data) => {
+                                    data.data.forEach((candidate, index) => {
+                                        var candidates =
+                                            document.getElementById(
+                                                "candidates"
+                                            );
+                                        var item =
+                                            document.createElement("div");
+                                        item.className = "item";
+
+                                        var img = document.createElement("img");
+                                        img.src = "images/team/team1.png";
+                                        item.appendChild(img);
+
+                                        var h4 = document.createElement("h4");
+                                        h4.innerHTML = candidate.name;
+                                        item.appendChild(h4);
+
+                                        candidates.appendChild(item);
+                                        console.log("esdfg");
+                                    });
+                                }
+                            );
+                        });
+                    </script>
+                    -->
+                    <!-- Team Member #2 -->
+                    <div class="item">
+                        <img src="img/team/team1.png" alt="" />
+                        <h4>Mahabhadra Shah</h4>
+                        <h5>Democratic Congress</h5>
+                        <p>
+                            Lorem ipsum dolor consectetur dolor consectetur
+                            adipisicing incididunt eiusmod temporcd incididunt
+                            consectetur laboredolore dolor adipisicing.
+                        </p>
+
+                        <div class="socials">
+                            <ul>
+                                <li>
+                                    <a class="facebook" href="#"
+                                        ><i class="fa fa-facebook"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="twitter" href="#"
+                                        ><i class="fa fa-twitter"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="linkedin" href="#"
+                                        ><i class="fa fa-linkedin"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="google-plus" href="#"
+                                        ><i class="fa fa-google-plus"></i
+                                    ></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="img/team/team5.png" alt="" />
+                        <h4>Vraj Patel</h4>
+                        <h5>Liberal Union</h5>
+                        <p>
+                            Lorem ipsum dolor consectetur dolor consectetur
+                            adipisicing incididunt eiusmod temporcd incididunt
+                            consectetur laboredolore dolor adipisicing.
+                        </p>
+
+                        <div class="socials">
+                            <ul>
+                                <li>
+                                    <a class="facebook" href="#"
+                                        ><i class="fa fa-facebook"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="twitter" href="#"
+                                        ><i class="fa fa-twitter"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="linkedin" href="#"
+                                        ><i class="fa fa-linkedin"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="google-plus" href="#"
+                                        ><i class="fa fa-google-plus"></i
+                                    ></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="img/team/team4.png" alt="" />
+                        <h4>Shivang Patel</h4>
+                        <h5>Liberal Union</h5>
+                        <p>
+                            Lorem ipsum dolor consectetur dolor consectetur
+                            adipisicing incididunt eiusmod temporcd incididunt
+                            consectetur laboredolore dolor adipisicing.
+                        </p>
+
+                        <div class="socials">
+                            <ul>
+                                <li>
+                                    <a class="facebook" href="#"
+                                        ><i class="fa fa-facebook"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="twitter" href="#"
+                                        ><i class="fa fa-twitter"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="linkedin" href="#"
+                                        ><i class="fa fa-linkedin"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="google-plus" href="#"
+                                        ><i class="fa fa-google-plus"></i
+                                    ></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="img/team/team3.png" alt="" />
+                        <h4>Meet Suthar</h4>
+                        <h5>Liberal Union</h5>
+                        <p>
+                            Lorem ipsum dolor consectetur dolor consectetur
+                            adipisicing incididunt eiusmod temporcd incididunt
+                            consectetur laboredolore dolor adipisicing.
+                        </p>
+
+                        <div class="socials">
+                            <ul>
+                                <li>
+                                    <a class="facebook" href="#"
+                                        ><i class="fa fa-facebook"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="twitter" href="#"
+                                        ><i class="fa fa-twitter"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="linkedin" href="#"
+                                        ><i class="fa fa-linkedin"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="google-plus" href="#"
+                                        ><i class="fa fa-google-plus"></i
+                                    ></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!-- Team -->
-            <div class="team-items team-carousel" id="candidates">
-                <!-- Team Member #1 -->
-                <div class="item">
-                    <img src="images/team/team1.jpg" alt="" />
-                    <h4>Malay Bhavsar</h4>
-                    <h5>Charotar Union</h5>
-                    <p>
-                        Lorem ipsum dolor consectetur dolor consectetur
-                        adipisicing incididunt eiusmod temporcd incididunt
-                        consectetur laboredolore dolor adipisicing.
-                    </p>
-
-                    <div class="socials">
-                        <ul>
-                            <li>
-                                <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- End Member -->
-
-                <!-- <script>
-                    $(document).ready(() => {
-                        $.get("http://localhost:8501/pp/candidate", (data) => {
-                            data.data.forEach((candidate, index) => {
-                                var candidates = document.getElementById("candidates");
-                                var item = document.createElement("div");
-                                item.className = "item";
-
-                                var img = document.createElement("img");
-                                img.src = 'images/team/team1.jpg';
-                                item.appendChild(img);
-
-                                var h4 = document.createElement("h4");
-                                h4.innerHTML = candidate.name;
-                                item.appendChild(h4);
-
-                                candidates.appendChild(item);
-                                console.log("esdfg");
-                            })
-                        })
-                    })
-                </script> -->
-                <!-- Team Member #2 -->
-                <div class="item">
-                    <img src="images/team/team2.jpg" alt="" />
-                    <h4>Mahabhadra Shah</h4>
-                    <h5>Democratic Congress</h5>
-                    <p>
-                        Lorem ipsum dolor consectetur dolor consectetur
-                        adipisicing incididunt eiusmod temporcd incididunt
-                        consectetur laboredolore dolor adipisicing.
-                    </p>
-
-                    <div class="socials">
-                        <ul>
-                            <li>
-                                <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="images/team/team3.jpg" alt="" />
-                    <h4>Vraj Patel</h4>
-                    <h5>Liberal Union</h5>
-                    <p>
-                        Lorem ipsum dolor consectetur dolor consectetur
-                        adipisicing incididunt eiusmod temporcd incididunt
-                        consectetur laboredolore dolor adipisicing.
-                    </p>
-
-                    <div class="socials">
-                        <ul>
-                            <li>
-                                <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="images/team/team3.jpg" alt="" />
-                    <h4>Shivang Patel</h4>
-                    <h5>Liberal Union</h5>
-                    <p>
-                        Lorem ipsum dolor consectetur dolor consectetur
-                        adipisicing incididunt eiusmod temporcd incididunt
-                        consectetur laboredolore dolor adipisicing.
-                    </p>
-
-                    <div class="socials">
-                        <ul>
-                            <li>
-                                <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="images/team/team3.jpg" alt="" />
-                    <h4>Meet Suthar</h4>
-                    <h5>Liberal Union</h5>
-                    <p>
-                        Lorem ipsum dolor consectetur dolor consectetur
-                        adipisicing incididunt eiusmod temporcd incididunt
-                        consectetur laboredolore dolor adipisicing.
-                    </p>
-
-                    <div class="socials">
-                        <ul>
-                            <li>
-                                <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/owl-carousel/owl.carousel.js"></script>
-    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-    <script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="js/easing.js"></script>
-    <script type="text/javascript" src="js/jquery.easypiechart.js"></script>
-    <script type="text/javascript" src="js/jquery.appear.js"></script>
-    <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
-    <script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
-    <script type="text/javascript" src="js/custom.js"></script>
-    <!-- 
+        </section>
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script
+            type="text/javascript"
+            src="js/owl-carousel/owl.carousel.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="js/jquery.flexslider-min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="js/jquery.magnific-popup.min.js"
+        ></script>
+        <script type="text/javascript" src="js/easing.js"></script>
+        <script type="text/javascript" src="js/jquery.easypiechart.js"></script>
+        <script type="text/javascript" src="js/jquery.appear.js"></script>
+        <script
+            type="text/javascript"
+            src="js/jquery.parallax-1.1.3.js"
+        ></script>
+        <script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+        <script type="text/javascript" src="js/custom.js"></script>
+        <!-- 
             
           -->
-
-</body>
-
+    </body>
 </html>

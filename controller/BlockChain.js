@@ -40,6 +40,10 @@ const Vote = (req, res) => {
             });
             query.save().then(
                 (result) => {
+                    console.log(
+                        "[+] Vote Registered. BlockId: ",
+                        result._id.toString()
+                    );
                     return response(res, true, "Vote Casted Successfully");
                 },
                 (err) => {

@@ -26,7 +26,7 @@ const PartyRegister = (req, res) => {
 const CandidateRegister = (req, res) => {
     /**
      * BODY: userId, partyId, state, description
-    */
+     */
     const query = new CandidateModel({
         userId: req.body.userId,
         partyId: req.body.partyId,
@@ -47,7 +47,6 @@ const Candidate = (req, res) => {
     if (req.body.candidateId) query._id = OId(req.body.candidateId);
     CandidateModel.find(query).then(
         (result) => {
-            console.log(result);
             return response(res, true, "Candidate fetch Success", result);
         },
         (err) => {
@@ -60,7 +59,6 @@ const Party = (req, res) => {
     if (req.body.partyId) query._id = OId(req.body.partyId);
     PPModel.find(query).then(
         (result) => {
-            console.log(result);
             return response(res, true, "Party fetch Success", result);
         },
         (err) => {

@@ -76,11 +76,13 @@ const OTP = (req, res) => {
             otp: otp,
         }
     ).then((result) => {
-        if (result.matchedCount === 0)
+        if (result.matchedCount === 0) {
+            console.log("[-] Either verify details or The user isn't verified");
             return response(res, false, "Please verify the details", result);
-        else if (result.modifiedCount === 1)
+        } else if (result.modifiedCount === 1) {
+            console.log("[+] OTP Generated: ", otp);
             return response(res, true, "OTP Success", { otp });
-        else return response(res, false, "Something went wrong");
+        } else return response(res, false, "Something went wrong");
     });
 };
 module.exports = { Register, Login, Logout, OTP };
