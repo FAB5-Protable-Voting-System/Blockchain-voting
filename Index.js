@@ -37,7 +37,7 @@ app.use("/user", require("./route/User"));
 app.use("/pp", require("./route/PP"));
 app.use("/bc", require("./route/BlockChain"));
 // Sharing pages.
-app.use("/", (req, res) => {
+app.use("/Home", (req, res) => {
     res.sendFile(path.join(__dirname, "public/template/index.html"));
 });
 app.use("/Live", (req, res) => {
