@@ -2,6 +2,7 @@
 const express = require("express");
 const session = require("express-session");
 var MongoDBStore = require("connect-mongodb-session")(session);
+const path = require("path");
 // Defining the constants.
 const app = express();
 // Configuring the app.
@@ -31,25 +32,30 @@ app.use(
     })
 );
 // Configuring the routes
-app.use("/", require("./route/Page"));
+// app.use("/", require("./route/Page"));
 app.use("/user", require("./route/User"));
 app.use("/pp", require("./route/PP"));
 app.use("/bc", require("./route/BlockChain"));
-// Starting the server.
-/*db.getDB()
-        .collection(db_block)
-        .find({})
-        .toArray((err, arr) => {
-            if (err) throw err;
-            console.log(
-                "[+] Creating Blockchain\n[+] Total Blocks: ",
-                arr.length
-            );
-            arr.map((ele) => {
-                blockchain.newBlock(ele.timestamp, ele.data);
-            });
-            console.log("[+] Blockchain Valid?", blockchain.isValidChain());
-        });*/
+// Sharing pages.
+app.use("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/template/index.html"));
+});
+app.use("/Live", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/template/liveResult.html"));
+});
+app.use("/Candidate", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/template/candidate.html"));
+});
+app.use("/Login", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/template/login.html"));
+});
+app.use("/Vote", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/template/vote.html"));
+});
+app.use("/Redirect", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/template/vote.html"));
+});
+
 app.listen(process.env.PORT || 8501, () => {
     console.log("Server started on ", process.env.PORT || 8501);
 });

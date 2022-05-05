@@ -61,4 +61,13 @@ const isValidChain = (req, res) => {
     });
 };
 
-module.exports = { Vote, isValidChain };
+const LiveCount = (req, res) => {
+    BlockChainModel.aggregate(
+        [{ $group: { _id: "$data.vote", count: { $sum: 1 } } }],
+        (err, result) => {
+            if (err) throw err;
+            response(res, true, "Live Count Data", result);
+        }
+    );
+};
+module.exports = { Vote, isValidChain, LiveCount };
