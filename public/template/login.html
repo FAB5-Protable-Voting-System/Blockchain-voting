@@ -137,7 +137,7 @@
                     type="button"
                     class="btn btn-danger"
                     style="width: 49%"
-                    id="getOTP"
+                    id="resendOTP"
                 >
                     Resend OTP
                 </button>
@@ -168,6 +168,10 @@
                     $("#voterId").val(),
                     $("#otp").val()
                 );
+            });
+            $("#resendOTP").click(() => {
+                showAlert("warning", "OTP Resent!");
+                OTP($("#aadharId").val(), $("#voterId").val());
             });
         </script>
     </body>

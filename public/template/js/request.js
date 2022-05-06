@@ -8,9 +8,13 @@ const Login = (aadharId, voterId, otp) => {
         },
         function (data, status) {
             if (status === "success") {
-                localStorage.setItem("fname", data.data.fname);
-                localStorage.setItem("lname", data.data.lname);
-                window.location.replace("/Vote");
+                if (data.success === true) {
+                    localStorage.setItem("fname", data.data.fname);
+                    localStorage.setItem("lname", data.data.lname);
+                    window.location.replace("/Vote");
+                } else {
+                    showAlert("danger", "Invalid OTP");
+                }
             } else {
             }
         }
@@ -25,7 +29,10 @@ const OTP = (aadharId, voterId) => {
         },
         function (data, status) {
             if (status === "success") {
-                showAlert("success", "Enter OTP: " + data.data.otp);
+                console.log(data.data);
+                if (data.success === true) {
+                    showAlert("success", "Enter OTP: " + data.data.otp);
+                } else showAlert("danger", data.data.msg);
             } else {
                 showAlert("danger", data.data.msg);
             }
