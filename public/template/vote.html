@@ -23,6 +23,7 @@
             crossorigin="anonymous"
         ></script>
     </head>
+
     <body>
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -80,16 +81,16 @@
                         <th scope="col">Vote Button</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="vote_table">
                     <!-- Add Javascript here for displaying real candidate -->
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
+                        <th class="table__row" scope="row">1</th>
+                        <td class="row__cell">Jacob</td>
+                        <td class="row__cell">Thornton</td>
                         <td>
                             <button
                                 type="button"
-                                class="btn btn-primary btn-sm"
+                                class="btn btn-primary btn-sm vote-btn"
                                 style="width: 150px"
                             >
                                 VOTE
@@ -103,7 +104,7 @@
                         <td>
                             <button
                                 type="button"
-                                class="btn btn-primary btn-sm"
+                                class="btn btn-primary btn-sm vote-btn"
                                 style="width: 150px"
                             >
                                 VOTE
@@ -117,7 +118,7 @@
                         <td>
                             <button
                                 type="button"
-                                class="btn btn-primary btn-sm"
+                                class="btn btn-primary btn-sm vote-btn"
                                 style="width: 150px"
                             >
                                 VOTE
@@ -148,6 +149,12 @@
                     localStorage.getItem("fname") +
                     " " +
                     localStorage.getItem("lname");
+            });
+            $(document).ready(function () {
+                GetPartyName();
+            });
+            $(".vote-btn").on("click", function () {
+                console.log("Heyy");
             });
         </script>
     </body>

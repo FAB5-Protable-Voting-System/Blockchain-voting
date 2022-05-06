@@ -47,6 +47,7 @@ const Login = async (req, res) => {
             { aadharId: req.body.aadharId, voterId: req.body.voterId },
             { $set: { otp: null } }
         ).then(() => {
+            console.log(req.session.user)
             return response(res, true, "Login Successful", {
                 isVerified: true,
                 fname: user.fname,
