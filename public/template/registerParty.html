@@ -131,5 +131,24 @@
                 <small>© 2020-2023 COPYRIGHT FAB5</small>
             </div>
         </footer>
+        <!-- Javascript -->
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"
+        ></script>
+        <script src="/public/template/js/alert.js"></script>
+        <script src="/public/template/js/request.js"></script>
+        <script>
+            $("#submit").click(() => {
+                RegisterParty({
+                    name: $("#name").val(),
+                    chairman: $("#chairman").val(),
+                    viceChairman: $("#viceChairman").val(),
+                    description: $("#description").val(),
+                    established: $("#established").val(),
+                });
+            });
+        </script>
     </body>
 </html>

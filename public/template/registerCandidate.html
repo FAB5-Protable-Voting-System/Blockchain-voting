@@ -87,12 +87,7 @@
                 title="Enter Party Id od the party you are representing"
             >
                 <label for="partyId">Party Id</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="partyId"
-                    placeholder=""
-                />
+                <input type="text" class="form-control" id="partyId" />
             </div>
             <div
                 class="form-group mb-2"
@@ -127,5 +122,23 @@
                 <small>© 2020-2023 COPYRIGHT FAB5</small>
             </div>
         </footer>
+        <!-- Javascript -->
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"
+        ></script>
+        <script src="/public/template/js/alert.js"></script>
+        <script src="/public/template/js/request.js"></script>
+        <script>
+            $("#submit").click(() => {
+                RegisterCandidate({
+                    userId: $("#userId").val(),
+                    partyId: $("#partyId").val(),
+                    state: $("#state").val(),
+                    description: $("#description").val(),
+                });
+            });
+        </script>
     </body>
 </html>
