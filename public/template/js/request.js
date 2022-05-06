@@ -11,8 +11,7 @@ const Login = (aadharId, voterId, otp) => {
                 if (data.success === true) {
                     localStorage.setItem("fname", data.data.fname);
                     localStorage.setItem("lname", data.data.lname);
-                    // window.location.replace("/Vote");
-                    showAlert("success", "Login Successful");
+                    window.location.replace("/Vote");
                 } else {
                     showAlert("danger", "Invalid OTP");
                 }
@@ -125,7 +124,9 @@ const GetPartyName = () => {
             btn.type = "button";
             btn.className = "btn btn-primary btn-sm vote-btn";
             btn.setAttribute("style", "width: 150px;");
-            btn.onclick = Vote(item._id);
+            btn.onclick = () => {
+                Vote(item._id);
+            };
             // btn.id = "id";
             btn.innerHTML = "VOTE";
             votebtn.appendChild(btn);
@@ -139,6 +140,7 @@ const GetPartyName = () => {
 };
 
 const Vote = (candidateId) => {
+    console.log("Candidate:", candidateId);
     $.post(
         "/bc/vote",
         {
@@ -146,8 +148,9 @@ const Vote = (candidateId) => {
         },
         function (data, status) {
             if (status === "success") {
-                console.log(data.data);
+                console.log(data);
                 if (data.success === true) {
+                    window.location.replace("/Home");
                     showAlert("success", data.msg);
                 } else showAlert("danger", data.msg);
             } else {

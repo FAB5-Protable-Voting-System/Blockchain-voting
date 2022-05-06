@@ -32,7 +32,7 @@ const Login = async (req, res) => {
      */
     const user = await UserModel.findOne(
         { aadharId: req.body.aadharId, voterId: req.body.voterId },
-        { otp: 1, isVerified: 1, fname: 1, lname: 1 }
+        { otp: 1, isVerified: 1, fname: 1, lname: 1, panId: 1 }
     );
     if (user === null) return response(res, false, "Please verify the details");
     else if (user.otp === parseInt(req.body.otp)) {
@@ -46,13 +46,13 @@ const Login = async (req, res) => {
                 userId: user._id.toString(),
                 aadharId: req.body.aadharId,
                 voterId: req.body.voterId,
+                panId: req.body.panId,
             };
             response(res, true, "Login Successful", {
                 isVerified: true,
                 fname: user.fname,
                 lname: user.lname,
             });
-            console.log(req.session);
         });
     } else {
         return response(res, false, "Invalid OTP");
