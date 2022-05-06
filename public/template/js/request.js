@@ -11,7 +11,8 @@ const Login = (aadharId, voterId, otp) => {
                 if (data.success === true) {
                     localStorage.setItem("fname", data.data.fname);
                     localStorage.setItem("lname", data.data.lname);
-                    window.location.replace("/Vote");
+                    // window.location.replace("/Vote");
+                    showAlert("success", "Login Successful");
                 } else {
                     showAlert("danger", "Invalid OTP");
                 }
@@ -32,9 +33,9 @@ const OTP = (aadharId, voterId) => {
                 console.log(data.data);
                 if (data.success === true) {
                     showAlert("success", "Enter OTP: " + data.data.otp);
-                } else showAlert("danger", data.data.msg);
+                } else showAlert("danger", data.msg);
             } else {
-                showAlert("danger", data.data.msg);
+                showAlert("danger", data.msg);
             }
         }
     );
@@ -44,7 +45,7 @@ const GetCandidate = (successCB) => {
         if (status === "success") {
             successCB(data.data);
         } else {
-            showAlert("danger", data.data.msg);
+            showAlert("danger", data.msg);
         }
     });
 };
@@ -53,7 +54,7 @@ const GetLiveCount = (successCB) => {
         if (status === "success") {
             successCB(data.data);
         } else {
-            showAlert("danger", data.data.msg);
+            showAlert("danger", data.msg);
         }
     });
 };
@@ -62,7 +63,7 @@ const GetUserName = (_id, count, cb) => {
         if (status === "success") {
             cb(count, data.data.fname + " " + data.data.lname);
         } else {
-            showAlert("danger", data.data.msg);
+            showAlert("danger", data.msg);
             return null;
         }
     });
@@ -108,7 +109,7 @@ const RegisterCandidate = (data) => {
     });
 };
 const GetPartyName = () => {
-    $.get("http://localhost:8501/pp/party", (data) => {
+    $.get("/pp/party", (data) => {
         data.data.forEach((item, index) => {
             var tbl = document.getElementById("vote_table");
             var tr = document.createElement("tr");
@@ -117,10 +118,6 @@ const GetPartyName = () => {
             var name = document.createElement("td");
             var party = document.createElement("td");
             var votebtn = document.createElement("td");
-            srno.className = "row__cell";
-            name.className = "row__cell";
-            party.className = "row__cell";
-            votebtn.className = "row__cell";
             srno.innerHTML = index + 1;
             name.innerHTML = item.chairman;
             party.innerHTML = item.name;
@@ -128,6 +125,7 @@ const GetPartyName = () => {
             btn.type = "button";
             btn.className = "btn btn-primary btn-sm vote-btn";
             btn.setAttribute("style", "width: 150px;");
+            btn.onclick = Vote(item._id);
             // btn.id = "id";
             btn.innerHTML = "VOTE";
             votebtn.appendChild(btn);
@@ -138,4 +136,23 @@ const GetPartyName = () => {
             tbl.appendChild(tr);
         });
     });
+};
+
+const Vote = (candidateId) => {
+    $.post(
+        "/bc/vote",
+        {
+            candidateId,
+        },
+        function (data, status) {
+            if (status === "success") {
+                console.log(data.data);
+                if (data.success === true) {
+                    showAlert("success", data.msg);
+                } else showAlert("danger", data.msg);
+            } else {
+                showAlert("danger", data.msg);
+            }
+        }
+    );
 };

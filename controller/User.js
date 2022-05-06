@@ -36,23 +36,23 @@ const Login = async (req, res) => {
     );
     if (user === null) return response(res, false, "Please verify the details");
     else if (user.otp === parseInt(req.body.otp)) {
-        req.session.user = {
-            isAuthenticated: true,
-            isVerified: user.isVerified,
-            userId: user._id.toString(),
-            aadharId: req.body.aadharId,
-            voterId: req.body.voterId,
-        };
         UserModel.updateOne(
             { aadharId: req.body.aadharId, voterId: req.body.voterId },
             { $set: { otp: null } }
         ).then(() => {
-            console.log(req.session.user)
-            return response(res, true, "Login Successful", {
+            req.session.user = {
+                isAuthenticated: true,
+                isVerified: user.isVerified,
+                userId: user._id.toString(),
+                aadharId: req.body.aadharId,
+                voterId: req.body.voterId,
+            };
+            response(res, true, "Login Successful", {
                 isVerified: true,
                 fname: user.fname,
                 lname: user.lname,
             });
+            console.log(req.session);
         });
     } else {
         return response(res, false, "Invalid OTP");
@@ -89,6 +89,7 @@ const OTP = (req, res) => {
     });
 };
 const getUserName = (req, res) => {
+    console.log(req.session?.user);
     CandidateModel.findOne(
         { _id: mongooseObjectId(req.query._id) },
         { userId: 1 },

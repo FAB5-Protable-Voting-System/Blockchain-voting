@@ -20,7 +20,7 @@ const Vote = (req, res) => {
     /**
      * BODY: candidateId
      */
-    console.log(req.session.user)
+    console.log(req.session);
     if (blockchain.exists(req.session.user.voterId)) {
         return response(res, false, "You have already voted");
     } else {
