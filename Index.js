@@ -55,6 +55,17 @@ app.use("/Vote", (req, res) => {
 app.use("/Redirect", (req, res) => {
     res.sendFile(path.join(__dirname, "public/template/vote.html"));
 });
+app.use("/Register/User", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/template/registerUser.html"));
+});
+app.use("/Register/Candidate", (req, res) => {
+    res.sendFile(
+        path.join(__dirname, "public/template/registerCandidate.html")
+    );
+});
+app.use("/Register/Party", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/template/registerParty.html"));
+});
 
 app.listen(process.env.PORT || 8501, () => {
     console.log("Server started on ", process.env.PORT || 8501);
