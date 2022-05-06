@@ -27,7 +27,7 @@ const UserModel = db.model(
             minlength: 10,
             maxlength: 10,
         },
-        dob: { type: Date, required: true },
+        dob: { type: String, required: true },
         mobile: {
             type: String,
             required: true,

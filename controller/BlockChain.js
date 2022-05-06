@@ -20,6 +20,7 @@ const Vote = (req, res) => {
     /**
      * BODY: candidateId
      */
+    console.log(req.session.user)
     if (blockchain.exists(req.session.user.voterId)) {
         return response(res, false, "You have already voted");
     } else {
@@ -40,7 +41,14 @@ const Vote = (req, res) => {
             });
             query.save().then(
                 (result) => {
-                    return response(res, true, "Vote Casted Successfully");
+                    console.log(
+                        "[+] Vote Registered. BlockId: ",
+                        result._id.toString()
+                    );
+                    req.session.destroy((err) => {
+                        if (err) throw err;
+                        return response(res, true, "Vote Casted Successfully");
+                    });
                 },
                 (err) => {
                     return response(res, false, "Unable to cast you vote", err);
@@ -57,4 +65,13 @@ const isValidChain = (req, res) => {
     });
 };
 
-module.exports = { Vote, isValidChain };
+const LiveCount = (req, res) => {
+    BlockChainModel.aggregate(
+        [{ $group: { _id: "$data.vote", count: { $sum: 1 } } }],
+        (err, result) => {
+            if (err) throw err;
+            response(res, true, "Live Count Data", result);
+        }
+    );
+};
+module.exports = { Vote, isValidChain, LiveCount };

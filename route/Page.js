@@ -1,5 +1,9 @@
 const PageRoute = require("express").Router();
 
+PageRoute.get("/new", (req, res) => {
+    res.sendFile("../public/template/Index.html");
+});
+// Old path
 PageRoute.get("/", (req, res) => {
     res.sendFile("../public/index.html");
 });
