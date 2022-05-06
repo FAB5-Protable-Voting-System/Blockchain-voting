@@ -18,9 +18,8 @@ const blockchain = new Blockchain();
 
 const Vote = (req, res) => {
     /**
-     * BODY: candidateId
+     * BODY: partyId
      */
-    console.log(req.session.user.voterId);
     if (blockchain.exists(req.session.user.voterId)) {
         return response(res, false, "You have already voted");
     } else {

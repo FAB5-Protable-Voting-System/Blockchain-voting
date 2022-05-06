@@ -57,13 +57,12 @@ const GetLiveCount = (successCB) => {
         }
     });
 };
-const GetUserName = (_id, count, cb) => {
-    $.get("/user/username", { _id }, function (data, status) {
+const GetPartyLive = (_id, count, cb) => {
+    $.get("/pp/live", { _id }, function (data, status) {
         if (status === "success") {
-            cb(count, data.data.fname + " " + data.data.lname);
+            cb(count, data.data.name, data.data.chairman);
         } else {
             showAlert("danger", data.msg);
-            return null;
         }
     });
 };
@@ -150,9 +149,10 @@ const Vote = (candidateId) => {
             if (status === "success") {
                 console.log(data);
                 if (data.success === true) {
-                    window.location.replace("/Home");
-                    showAlert("success", data.msg);
-                } else showAlert("danger", data.msg);
+                    window.location.replace("/Redirect");
+                } else {
+                    window.location.replace("/ErrorVote");
+                }
             } else {
                 showAlert("danger", data.msg);
             }

@@ -5,3 +5,6 @@ function showAlert(type, msg) {
         document.getElementById("alertContainer").innerHTML = "";
     }, 5000);
 }
+function gotoweb(loc) {
+    window.location.href = loc;
+}

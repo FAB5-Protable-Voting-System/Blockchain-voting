@@ -38,37 +38,37 @@ app.set("trust proxy", 1);
 // Sharing pages.
 const PageRoute = require("express").Router();
 
-PageRoute.get("/Home", (req, res) => {
-    res.sendFile(path.join(__dirname, "public/template/index.html"));
+PageRoute.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/index.html"));
 });
 PageRoute.get("/Live", (req, res) => {
-    res.sendFile(path.join(__dirname, "public/template/liveResult.html"));
+    res.sendFile(path.join(__dirname, "public/liveResult.html"));
 });
 PageRoute.get("/Candidate", (req, res) => {
-    res.sendFile(path.join(__dirname, "public/template/candidate.html"));
+    res.sendFile(path.join(__dirname, "public/candidate.html"));
 });
 PageRoute.get("/Login", (req, res) => {
-    res.sendFile(path.join(__dirname, "public/template/login.html"));
+    res.sendFile(path.join(__dirname, "public/login.html"));
 });
 PageRoute.get("/Vote", (req, res) => {
-    console.log(req.session?.user);
     if (req.session?.user?.isAuthenticated)
-        res.sendFile(path.join(__dirname, "public/template/vote.html"));
-    else res.redirect("/Home");
+        res.sendFile(path.join(__dirname, "public/vote.html"));
+    else res.redirect("/");
 });
 PageRoute.get("/Redirect", (req, res) => {
-    res.sendFile(path.join(__dirname, "public/template/vote.html"));
+    res.sendFile(path.join(__dirname, "public/redirect.html"));
+});
+PageRoute.get("/ErrorVote", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/errorVote.html"));
 });
 PageRoute.get("/Register/User", (req, res) => {
-    res.sendFile(path.join(__dirname, "public/template/registerUser.html"));
+    res.sendFile(path.join(__dirname, "public/registerUser.html"));
 });
 PageRoute.get("/Register/Candidate", (req, res) => {
-    res.sendFile(
-        path.join(__dirname, "public/template/registerCandidate.html")
-    );
+    res.sendFile(path.join(__dirname, "public/registerCandidate.html"));
 });
 PageRoute.get("/Register/Party", (req, res) => {
-    res.sendFile(path.join(__dirname, "public/template/registerParty.html"));
+    res.sendFile(path.join(__dirname, "public/registerParty.html"));
 });
 
 // Configuring the routes

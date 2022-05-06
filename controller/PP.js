@@ -66,5 +66,21 @@ const Party = (req, res) => {
         }
     );
 };
+const getLive = (req, res) => {
+    PPModel.findOne(
+        { _id: OId(req.query._id) },
+        { name: 1, chairman: 1 },
+        (err, result) => {
+            if (err) throw err;
+            response(res, true, "Live Count", result);
+        }
+    );
+};
 
-module.exports = { Candidate, PartyRegister, CandidateRegister, Party };
+module.exports = {
+    Candidate,
+    PartyRegister,
+    CandidateRegister,
+    Party,
+    getLive,
+};

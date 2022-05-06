@@ -1,7 +1,5 @@
 const UserModel = require("../models/User");
-const CandidateModel = require("../models/Candidate");
 const response = require("../utils/Response");
-const mongooseObjectId = require("mongoose").Types.ObjectId;
 
 const Register = (req, res) => {
     /**
@@ -39,21 +37,24 @@ const Login = async (req, res) => {
         UserModel.updateOne(
             { aadharId: req.body.aadharId, voterId: req.body.voterId },
             { $set: { otp: null } }
-        ).then(() => {
-            req.session.user = {
-                isAuthenticated: true,
-                isVerified: user.isVerified,
-                userId: user._id.toString(),
-                aadharId: req.body.aadharId,
-                voterId: req.body.voterId,
-                panId: req.body.panId,
-            };
-            response(res, true, "Login Successful", {
-                isVerified: true,
-                fname: user.fname,
-                lname: user.lname,
-            });
-        });
+        ).then(
+            () => {
+                req.session.user = {
+                    isAuthenticated: true,
+                    isVerified: user.isVerified,
+                    userId: user._id.toString(),
+                    aadharId: req.body.aadharId,
+                    voterId: req.body.voterId,
+                    panId: user.panId,
+                };
+                response(res, true, "Login Successful", {
+                    isVerified: true,
+                    fname: user.fname,
+                    lname: user.lname,
+                });
+            },
+            (err) => response(res, false, "Something went wrong", err)
+        );
     } else {
         return response(res, false, "Invalid OTP");
     }
@@ -68,42 +69,40 @@ const OTP = (req, res) => {
     /**
      * BODY: aadharId, voterId
      */
-    let otp = Math.ceil(Math.random() * 1000000);
-    UserModel.updateOne(
-        {
-            aadharId: req.body.aadharId,
-            voterId: req.body.voterId,
-            isVerified: true,
-        },
-        {
-            otp: otp,
-        }
-    ).then((result) => {
-        if (result.matchedCount === 0) {
-            console.log("[-] Either verify details or The user isn't verified");
-            return response(res, false, "Please verify the details", result);
-        } else if (result.modifiedCount === 1) {
-            console.log("[+] OTP Generated: ", otp);
-            return response(res, true, "OTP Success", { otp });
-        } else return response(res, false, "Something went wrong");
-    });
-};
-const getUserName = (req, res) => {
-    console.log(req.session?.user);
-    CandidateModel.findOne(
-        { _id: mongooseObjectId(req.query._id) },
-        { userId: 1 },
+    UserModel.findOne(
+        { aadharId: req.body.aadharId, voterId: req.body.voterId },
+        { isVerified: 1 },
         (err, result) => {
             if (err) throw err;
-            UserModel.findOne(
-                { _id: result.userId },
-                { fname: 1, lname: 1 },
-                (err, result1) => {
-                    if (err) throw err;
-                    response(res, true, "User Name", result1);
+            if (result.isVerified === false)
+                return response(res, false, "Your Profile is not verified");
+            let otp = Math.ceil(Math.random() * 1000000);
+            UserModel.updateOne(
+                {
+                    aadharId: req.body.aadharId,
+                    voterId: req.body.voterId,
+                    isVerified: true,
+                },
+                {
+                    otp: otp,
                 }
-            );
+            ).then((result) => {
+                if (result.matchedCount === 0) {
+                    console.log(
+                        "[-] Either verify details or The user isn't verified"
+                    );
+                    return response(
+                        res,
+                        false,
+                        "Please verify the details",
+                        result
+                    );
+                } else if (result.modifiedCount === 1) {
+                    console.log("[+] OTP Generated: ", otp);
+                    return response(res, true, "OTP Success", { otp });
+                } else return response(res, false, "Something went wrong");
+            });
         }
     );
 };
-module.exports = { Register, Login, Logout, OTP, getUserName };
+module.exports = { Register, Login, Logout, OTP };
