@@ -32,9 +32,9 @@ const OTP = (aadharId, voterId) => {
                 console.log(data.data);
                 if (data.success === true) {
                     showAlert("success", "Enter OTP: " + data.data.otp);
-                } else showAlert("danger", data.data.msg);
+                } else showAlert("danger", data.msg);
             } else {
-                showAlert("danger", data.data.msg);
+                showAlert("danger", data.msg);
             }
         }
     );
@@ -44,7 +44,7 @@ const GetCandidate = (successCB) => {
         if (status === "success") {
             successCB(data.data);
         } else {
-            showAlert("danger", data.data.msg);
+            showAlert("danger", data.msg);
         }
     });
 };
@@ -53,7 +53,7 @@ const GetLiveCount = (successCB) => {
         if (status === "success") {
             successCB(data.data);
         } else {
-            showAlert("danger", data.data.msg);
+            showAlert("danger", data.msg);
         }
     });
 };
@@ -62,7 +62,7 @@ const GetUserName = (_id, count, cb) => {
         if (status === "success") {
             cb(count, data.data.fname + " " + data.data.lname);
         } else {
-            showAlert("danger", data.data.msg);
+            showAlert("danger", data.msg);
             return null;
         }
     });
