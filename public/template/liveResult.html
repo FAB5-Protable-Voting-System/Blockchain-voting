@@ -4,7 +4,12 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PVS | Live Voting</title>
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="/public/template/icon/india.png"
+        />
+        <title>PVS | Live Result</title>
         <link rel="stylesheet" href="/public/template/css/animate.css" />
         <!-- Bootstrap -->
         <link
@@ -50,7 +55,7 @@
                         <a class="nav-link" href="/Home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Live">Live Voting</a>
+                        <a class="nav-link" href="/Live">Live Result</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Candidate">Candidate</a>
@@ -78,28 +83,7 @@
                 </div>
             </div>
             <div class="container text-center">
-                <div class="row">
-                    <div class="col-md my-3">
-                        <h1>0</h1>
-                        <h5><b>Malay</b></h5>
-                    </div>
-                    <div class="col-md my-3">
-                        <h1>0</h1>
-                        <h5><b>Shivang</b></h5>
-                    </div>
-                    <div class="col-md my-3">
-                        <h1>0</h1>
-                        <h5><b>Meet</b></h5>
-                    </div>
-                    <div class="col-md my-3">
-                        <h1>0</h1>
-                        <h5><b>Mahabhadra</b></h5>
-                    </div>
-                    <div class="col-md my-3">
-                        <h1>0</h1>
-                        <h5><b>Vraj</b></h5>
-                    </div>
-                </div>
+                <div class="row" id="candidateList"></div>
             </div>
         </div>
         <!-- Footer -->
@@ -108,5 +92,31 @@
                 <small>© 2020-2023 COPYRIGHT FAB5</small>
             </div>
         </footer>
+        <!-- Javascript -->
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"
+        ></script>
+        <script src="/public/template/js/alert.js"></script>
+        <script src="/public/template/js/request.js"></script>
+        <script>
+            $(document).ready(function () {
+                GetLiveCount(successCB);
+            });
+            function successCB(data) {
+                data.map(async (ele) => {
+                    GetUserName(ele._id, ele.count, showCandidate);
+                });
+            }
+            function showCandidate(count, name) {
+                document.getElementById("candidateList").innerHTML +=
+                    '<div class="col-md my-3"><h1>' +
+                    count +
+                    "</h1><h5><b>" +
+                    name +
+                    "</b></h5></div>";
+            }
+        </script>
     </body>
 </html>

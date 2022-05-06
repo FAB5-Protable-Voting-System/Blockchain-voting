@@ -1,5 +1,7 @@
 const UserModel = require("../models/User");
+const CandidateModel = require("../models/Candidate");
 const response = require("../utils/Response");
+const mongooseObjectId = require("mongoose").Types.ObjectId;
 
 const Register = (req, res) => {
     /**
@@ -85,4 +87,21 @@ const OTP = (req, res) => {
         } else return response(res, false, "Something went wrong");
     });
 };
-module.exports = { Register, Login, Logout, OTP };
+const getUserName = (req, res) => {
+    CandidateModel.findOne(
+        { _id: mongooseObjectId(req.query._id) },
+        { userId: 1 },
+        (err, result) => {
+            if (err) throw err;
+            UserModel.findOne(
+                { _id: result.userId },
+                { fname: 1, lname: 1 },
+                (err, result1) => {
+                    if (err) throw err;
+                    response(res, true, "User Name", result1);
+                }
+            );
+        }
+    );
+};
+module.exports = { Register, Login, Logout, OTP, getUserName };

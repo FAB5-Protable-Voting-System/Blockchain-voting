@@ -44,7 +44,10 @@ const Vote = (req, res) => {
                         "[+] Vote Registered. BlockId: ",
                         result._id.toString()
                     );
-                    return response(res, true, "Vote Casted Successfully");
+                    req.session.destroy((err) => {
+                        if (err) throw err;
+                        return response(res, true, "Vote Casted Successfully");
+                    });
                 },
                 (err) => {
                     return response(res, false, "Unable to cast you vote", err);
