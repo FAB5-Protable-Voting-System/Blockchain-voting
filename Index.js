@@ -51,8 +51,8 @@ PageRoute.get("/Login", (req, res) => {
     res.sendFile(path.join(__dirname, "public/template/login.html"));
 });
 PageRoute.get("/Vote", (req, res) => {
-    console.log(res.session?.user);
-    if (res.session?.user?.isAuthenticated)
+    console.log(req.session?.user);
+    if (req.session?.user?.isAuthenticated)
         res.sendFile(path.join(__dirname, "public/template/vote.html"));
     else res.redirect("/Home");
 });
