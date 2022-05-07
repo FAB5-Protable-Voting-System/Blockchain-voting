@@ -26,7 +26,7 @@ app.use(
         proxy: true,
         cookie: { secure: false },
         store: new MongoDBStore({
-            uri: require("./configs/db.config").localUrl,
+            uri: require("./configs/db.config").url,
             collection: "sessions",
         }),
     })

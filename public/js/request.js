@@ -71,7 +71,7 @@ const RegisterUser = (data) => {
     $.post("/user/register", data, function (data, status) {
         if (status === "success") {
             if (data.success === true) {
-                window.location.replace("/Home");
+                window.location.replace("/");
                 showAlert("success", data.msg);
             } else {
                 showAlert("danger", data.msg);
@@ -84,7 +84,7 @@ const RegisterParty = (data) => {
     $.post("/pp/registerParty", data, function (data, status) {
         if (status === "success") {
             if (data.success === true) {
-                window.location.replace("/Home");
+                window.location.replace("/");
                 showAlert("success", data.msg);
             } else {
                 showAlert("danger", data.msg);
@@ -97,7 +97,7 @@ const RegisterCandidate = (data) => {
     $.post("/pp/registerCandidate", data, function (data, status) {
         if (status === "success") {
             if (data.success === true) {
-                window.location.replace("/Home");
+                window.location.replace("/");
                 showAlert("success", data.msg);
             } else {
                 showAlert("danger", data.msg);
