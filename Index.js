@@ -26,7 +26,7 @@ app.use(
         proxy: true,
         cookie: { secure: false },
         store: new MongoDBStore({
-            uri: require("./configs/db.config").url,
+            uri: require("./configs/db.config").localUrl,
             collection: "sessions",
         }),
     })
@@ -78,6 +78,6 @@ app.use("/pp", require("./route/PP"));
 app.use("/bc", require("./route/BlockChain"));
 app.use("/", PageRoute);
 
-app.listen(process.env.PORT || 8501, () => {
+app.listen(process.env.PORT || 8501, "0.0.0.0", () => {
     console.log("Server started on ", process.env.PORT || 8501);
 });
