@@ -1,7 +1,18 @@
 const BlockChainModel = require("../models/BlockChain");
 const Blockchain = require("../utils/Blockchain");
 const response = require("../utils/Response");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+
+const httpServer = createServer();
+const io = new Server(httpServer, {
+    // options
+});
+
 const blockchain = new Blockchain();
+io.on("connection", (socket) => {
+    console.log("New Client Connected:", socket.id);
+});
 (() => {
     BlockChainModel.find({}).then(
         async (result) => {
@@ -14,6 +25,7 @@ const blockchain = new Blockchain();
             console.log("Error Creating the block chain");
         }
     );
+    httpServer.listen(8502);
 })();
 
 const Vote = (req, res) => {
@@ -23,7 +35,16 @@ const Vote = (req, res) => {
     if (blockchain.exists(req.session.user.voterId)) {
         return response(res, false, "You have already voted");
     } else {
-        var resp = blockchain.newBlock(Date.now(), {
+        var date = Date.now();
+        var resp = blockchain.newBlock(date, {
+            voterId: req.session.user.voterId,
+            aadharId: req.session.user.aadharId,
+            panId: req.session.user.panId,
+            vote: req.body.candidateId,
+        });
+
+        io.emit("vote", {
+            date,
             voterId: req.session.user.voterId,
             aadharId: req.session.user.aadharId,
             panId: req.session.user.panId,
@@ -46,6 +67,9 @@ const Vote = (req, res) => {
                     );
                     req.session.destroy((err) => {
                         if (err) throw err;
+                        io.emit("checkHash", {
+                            hash: blockchain.lastBlock.hash,
+                        });
                         return response(res, true, "Vote Casted Successfully");
                     });
                 },

@@ -5,7 +5,7 @@ class Blockchain {
         this.chain = [this.genesisBlock()];
     }
     genesisBlock() {
-        return new Block(0, Date.now(), { id: "0000" }, "0");
+        return new Block(0, 0, { id: "0000" }, "0");
     }
     get lastBlock() {
         return this.chain[this.chain.length - 1];
